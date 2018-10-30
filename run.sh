@@ -3,7 +3,7 @@
 URL=https://slack.com/api/files.upload
 HOST=$(cat /tmp/hostname)
 FILE=${SLACK_FILE}
-TITLE=${SLACK_TITLE}
+TITLE=${SLACK_TITLE}.$(date +%Y_%m_%d_%H)
 TOKEN=${SLACK_TOKEN}
 CHANNEL=${SLACK_CHANNEL}
 
@@ -14,7 +14,7 @@ else
 fi
 
 if [ -z "${TITLE}" ]; then
-  TITLE="Unknown"
+  TITLE="Unknown.$(date +%Y_%m_%d_%H)"
 fi
 
 curl ${URL} -F channels="${CHANNEL}" -F token="${TOKEN}" -F title="${TITLE} from ${HOST}" -F filename="${TITLE}-${HOST}.log" -F file=@"${FILE}"
